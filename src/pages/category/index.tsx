@@ -50,12 +50,13 @@ export default function Category() {
                         )
                     }) : <DataNotFound />}
                 </Grid>
-
-                <Grid container spacing={3} marginTop={1} className="animate__animated animate__fadeIn animate__delay-1s">
-                    <Grid item xs={12}>
-                        <Link href="/book/all" className="hover:text-primary delay-75"> Lihat Semua Buku <Icon icon='arrow-filled' className="text-1xl text-secondary" /> </Link>
+                {CategoryList && CategoryList?.length > 0 &&
+                    <Grid container spacing={3} marginTop={1} className="animate__animated animate__fadeIn animate__delay-1s">
+                        <Grid item xs={12}>
+                            <Link href="/book/all" className="hover:text-primary delay-75"> Lihat Semua Buku <Icon icon='arrow-filled' className="text-1xl text-secondary" /> </Link>
+                        </Grid>
                     </Grid>
-                </Grid>
+                }
             </Stack>
         </Container>
     )
