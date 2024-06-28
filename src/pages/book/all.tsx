@@ -6,7 +6,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import FilterBook from "./filter";
+import FilterBookCategory from "../../view/category/filter";
 
 export const schema = z.object({
     category_id: z.object({
@@ -143,7 +143,7 @@ export default function BookAll() {
                 </Grid>
             </Stack>
             {openModal &&
-                <FilterBook open={openModal} toggle={toggle} form={form} />
+                <FilterBookCategory open={openModal} toggle={toggle} form={form} />
             }
         </Container>
     )

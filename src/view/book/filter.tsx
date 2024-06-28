@@ -3,7 +3,7 @@ import { ModalCustom } from "@/components/custom-modal";
 import { BookCategoryResponse } from "@/types/category-response.types";
 import { Grid } from "@mui/material";
 import { UseFormReturn } from "react-hook-form";
-import { SchemaForm } from ".";
+import { SchemaForm } from "../../pages/category/[ID]";
 
 interface Props {
     open: boolean;

@@ -3,7 +3,7 @@ import { ModalCustom } from "@/components/custom-modal";
 import { BookCategoryResponse } from "@/types/category-response.types";
 import { Grid } from "@mui/material";
 import { UseFormReturn } from "react-hook-form";
-import { SchemaForm } from "./all";
+import { SchemaForm } from "../../pages/book/all";
 
 interface Props {
     open: boolean;
@@ -22,7 +22,7 @@ const optionOrder = [
     { id: "asc", label: "Urutkan dari Terkecil ke Terbesar" },
 ];
 
-const FilterBook = ({ open, toggle, form }: Props) => {
+const FilterBookCategory = ({ open, toggle, form }: Props) => {
 
     const submit = async (data: SchemaForm) => {
         console.log("data", data)
@@ -75,4 +75,4 @@ const FilterBook = ({ open, toggle, form }: Props) => {
     );
 };
 
-export default FilterBook;
+export default FilterBookCategory;
