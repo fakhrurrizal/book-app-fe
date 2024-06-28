@@ -1,4 +1,5 @@
 import Icon from "@/components/icon";
+import DataNotFound from "@/components/not-found";
 import { useBookCategoory } from "@/utils/queries/use-book-category";
 import { Card, CircularProgress, Container, Grid, Stack } from "@mui/material";
 import Link from "next/link";
@@ -34,7 +35,7 @@ export default function Category() {
             </p>
             <Stack>
                 <Grid container spacing={3} marginTop={4}>
-                    {CategoryList?.map((item, index) => {
+                    {CategoryList && CategoryList?.length > 0 ? CategoryList?.map((item, index) => {
 
                         return (
                             <Grid item xs={12} md={4} key={index} className="animate__animated animate__fadeIn animate__delay-1s">
@@ -47,7 +48,7 @@ export default function Category() {
                                 </Card>
                             </Grid>
                         )
-                    })}
+                    }) : <DataNotFound />}
                 </Grid>
 
                 <Grid container spacing={3} marginTop={1} className="animate__animated animate__fadeIn animate__delay-1s">
