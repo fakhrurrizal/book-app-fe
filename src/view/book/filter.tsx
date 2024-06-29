@@ -25,7 +25,6 @@ const optionOrder = [
 const FilterBook = ({ open, toggle, form }: Props) => {
 
     const submit = async (data: SchemaForm) => {
-        console.log("data", data)
         toggle();
     };
 

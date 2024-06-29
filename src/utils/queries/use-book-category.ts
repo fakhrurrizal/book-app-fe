@@ -1,11 +1,14 @@
 import axiosInterceptor from '@/config/axios.config';
-import { BookCategoryId, BookCategoryResponse } from '@/types/category-response.types';
+import {
+  BookCategoryId,
+  BookCategoryResponse,
+} from '@/types/category-response.types';
 import queryString from 'query-string';
 import { useQuery } from 'react-query';
 import { getApi } from '../constants';
 
 export const useBookCategoory = (args: any) => {
-  const { pageIndex, pageSize, searchValue } = args;
+  const { pageIndex, pageSize, searchValue,  } = args;
 
   const query: Record<string, string | number> = {
     limit: Number(pageSize),
@@ -32,7 +35,6 @@ export const useBookCategoory = (args: any) => {
 };
 
 export const useBookCategoryId = (id: any) => {
-
   const endpoint = queryString.stringifyUrl({
     url: getApi('book_category') + '/' + id,
   });
