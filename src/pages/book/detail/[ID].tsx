@@ -117,7 +117,7 @@ export default function BookDetail() {
                                         Bahasa
                                     </Typography>
                                     <Typography textTransform="capitalize" fontSize={14} fontWeight={500} lineHeight={2}>
-                                        {data?.languange}
+                                        {data?.language}
                                     </Typography>
                                 </Grid>
                             </Grid>

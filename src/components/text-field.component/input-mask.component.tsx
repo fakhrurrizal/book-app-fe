@@ -1,6 +1,5 @@
 import { forwardRef } from 'react'
-import { IMask, IMaskInput } from 'react-imask'
-import { ReactElement } from 'react-imask/dist/mixin'
+import { IMask, IMaskInput, ReactElementProps } from 'react-imask'
 
 interface MaskInputProps {
     onChange: (event: { target: { name: string; value: string } }) => void
@@ -8,7 +7,7 @@ interface MaskInputProps {
 }
 
 
-export const NumberMaskInput = forwardRef<ReactElement, MaskInputProps>(function TextMaskCustom(props, ref) {
+export const NumberMaskInput = forwardRef<any, MaskInputProps>(function TextMaskCustom(props, ref) {
     const { onChange, name, ...other } = props
 
     return (
@@ -23,7 +22,7 @@ export const NumberMaskInput = forwardRef<ReactElement, MaskInputProps>(function
     )
 })
 
-export const YearMaskInput = forwardRef<ReactElement, MaskInputProps>(function TextMaskCustom(props, ref) {
+export const YearMaskInput = forwardRef<any, MaskInputProps>(function TextMaskCustom(props, ref) {
     const { onChange, name, ...other } = props
 
     return (
