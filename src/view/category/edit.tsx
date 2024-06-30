@@ -21,7 +21,7 @@ const EditCategory = ({ open, toggle, data }: Props) => {
 
     const form = useForm<BookCategorySchemaForm>({
         defaultValues: {
-            description: "", icon: "", name: "", status: true
+            description: "", icon: "", name: "", 
         },
         resolver: zodResolver(BookCategorySchema)
     })
@@ -31,7 +31,6 @@ const EditCategory = ({ open, toggle, data }: Props) => {
             description: data?.description ?? '-',
             icon: data?.icon ?? "",
             name: data?.name ?? "",
-            status: data?.status
         })
     }, [data, form])
 

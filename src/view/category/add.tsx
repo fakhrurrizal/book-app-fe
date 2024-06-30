@@ -18,7 +18,7 @@ const AddCategory = ({ open, toggle }:Props) => {
 
     const form = useForm<BookCategorySchemaForm>({
         defaultValues : {
-            description : "", icon : "", name : "", status : true
+            description : "", icon : "", name : "", 
         },
         resolver: zodResolver(BookCategorySchema)
     })
