@@ -27,11 +27,15 @@ export interface DataBook {
   publisher: string;
   image: string;
   publication_year: number;
-  languange: string;
+  language: string;
   description: string;
   number_of_pages: number;
   status: boolean;
   category: Category;
+}
+
+export interface BookId {
+  data: DataBook;
 }
 
 export interface Category {

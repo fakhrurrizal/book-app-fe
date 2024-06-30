@@ -1,10 +1,11 @@
 import { ModalCustom } from "@/components/custom-modal"
 import FormDataCategory from "./formData"
 import { useForm } from "react-hook-form"
-import { BookCategorySchemaForm } from "./schema"
+import { BookCategorySchema, BookCategorySchemaForm } from "./schema"
 import { objectClear } from "@/utils/object-clear.helper"
 import { useAddCategory } from "@/utils/mutations/use-category"
 import { queryClient } from "@/pages/_app"
+import { zodResolver } from "@hookform/resolvers/zod"
 
 interface Props {
     open : boolean
@@ -18,7 +19,8 @@ const AddCategory = ({ open, toggle }:Props) => {
     const form = useForm<BookCategorySchemaForm>({
         defaultValues : {
             description : "", icon : "", name : "", status : true
-        }
+        },
+        resolver: zodResolver(BookCategorySchema)
     })
 
     const onSubmit = async(data:BookCategorySchemaForm) => {

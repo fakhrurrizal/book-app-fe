@@ -6,9 +6,10 @@ import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded'
 import VisibilityOffRoundedIcon from '@mui/icons-material/VisibilityOffRounded'
 import Typography from '@mui/material/Typography'
 import { Control, Controller, FieldValues, Path } from 'react-hook-form'
+import { NumberMaskInput, YearMaskInput } from './input-mask.component'
 
 export type TextFieldProps<T extends FieldValues = Record<string, any>> = Omit<MuiTextFieldProps, 'name'> & {
-    inputFormat?: 'NORMAL' | 'NUMBER' | 'PRICE' | 'PASSWORD' | 'PHONE' | 'PPN'
+    inputFormat?: 'NORMAL' | 'NUMBER' | 'PRICE' | 'PASSWORD' | 'PHONE' | 'PPN' | 'YEAR'
     name: Path<T>
     control: Control<T>
     onValueChange?: (value: string) => void
@@ -25,10 +26,10 @@ export function TextField<T extends FieldValues = Record<string, any>>(props: Te
 
     const inputComponent: any = useMemo(() => {
         switch (inputFormat) {
-            case 'PRICE':
-            case 'PPN':
-          
-
+            case 'NUMBER':
+                return NumberMaskInput
+            case 'YEAR':
+                return YearMaskInput
             default:
                 return undefined
         }

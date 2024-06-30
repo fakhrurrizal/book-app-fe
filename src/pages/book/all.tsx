@@ -1,12 +1,15 @@
 import Icon from "@/components/icon";
 import DataNotFound from "@/components/not-found";
 import { useBook } from "@/utils";
-import { Card, CardActions, CardContent, CircularProgress, Container, Grid, IconButton, Stack, TextField } from "@mui/material";
+import AddBook from "@/view/book/add";
+import FilterBook from "@/view/book/filter";
+import RowOptionsBook from "@/view/book/rowOptionBook";
+import { Button, Card, CardActions, CardContent, CircularProgress, Container, Grid, IconButton, Stack, TextField } from "@mui/material";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import FilterBookCategory from "../../view/category/filter";
 
 export const schema = z.object({
     category_id: z.object({
@@ -46,15 +49,25 @@ export default function BookAll() {
 
     const [searchValue, setSearchValue] = useState('')
 
+    const route = useRouter()
+
     const [openModal, setOpenModal] = useState<boolean>(false)
 
+    const [openAdd, setOpenAdd] = useState<boolean>(false)
+
+    const [manage, setManage] = useState<boolean>(false)
+
+    const toggleManage = () => setManage(!manage)
+
     const toggle = () => setOpenModal(!openModal)
+
+    const toggleAdd = () => setOpenAdd(!openAdd)
 
     const form = useForm<SchemaForm>({
         defaultValues: {
             category_id: { id: 0, label: "Semua Kategori" },
-            order: { id: "desc", label: "Terbesar Ke Terkecil" },
-            sort: { id: "id", label: "Diurutkan Berdasarkan ID" },
+            order: { id: "desc", label: "" },
+            sort: { id: "id", label: "" },
         }
     });
 
@@ -72,18 +85,29 @@ export default function BookAll() {
         setSearchValue(event.target.value)
     }
 
+    console.log("tesss", form.watch("sort.id"))
+
 
     return (
         <Container className="flex flex-col pt-3 mb-6  text-center">
-            <h1 className="text-4xl mt-10 font-bold text-primary animate__animated animate__backInDown ">
-                Pilih Buku
-            </h1>
-            <p className="text-[20px] mt-3 animate__animated animate__fadeIn animate__delay-1s">
-                Pilih buku yang ingin kamu cari
-            </p>
-            <Stack>
-                <Grid container spacing={2} marginTop={4}>
-                    <Grid item xs={11}>
+            <div className="relative">
+                <div className=" flex items-center animate__animated animate__backInDown">
+                    <IconButton onClick={() => route.push('/category')}>
+                        <Icon icon={'ion:arrow-back'} className="text-2xl text-primary" />
+                    </IconButton>
+                </div>
+                <div className="text-center">
+                    <h1 className="text-4xl font-bold text-primary animate__animated animate__backInDown">
+                        Pilih Buku
+                    </h1>
+                    <p className="text-[16px] mt-3 animate__animated animate__fadeIn animate__delay-1s">
+                        Pilih buku yang ingin kamu cari
+                    </p>
+                </div>
+            </div>
+            <Stack className="animate__animated animate__fadeIn animate__delay-2s">
+                <Grid container spacing={3} marginTop={4}>
+                    <Grid item xs={10.5}>
                         <TextField
                             size='small'
                             name='search'
@@ -93,11 +117,25 @@ export default function BookAll() {
                             variant='outlined'
                         />
                     </Grid>
-                    <Grid item xs={1} marginTop={-1}>
+                    <Grid item xs={0.9} marginTop={-1}>
                         <IconButton onClick={toggle}><Icon icon={'ion:filter'} className="text-3xl text-secondary" /></IconButton>
                     </Grid>
+                    <Grid item xs={0.5} marginTop={-1} className="flex justify-end ">
+                        <IconButton onClick={toggleManage}>
+                            {manage ?
+                                <Icon icon={'carbon:close-outline'} className="text-3xl text-secondary" style={{ fontWeight: 800 }} />
+                                :
+                                <Icon icon={'ep:setting'} className="text-3xl text-secondary" style={{ fontWeight: 800 }} />
+                            }
+                        </IconButton>
+                    </Grid>
                 </Grid>
-                <Grid container spacing={3} marginTop={4}>
+                <Grid container spacing={3} marginTop={2}>
+
+
+                    <Grid item xs={12} className="flex justify-end">
+                        {manage && <Button onClick={toggleAdd} variant="outlined">Tambah Buku</Button>}
+                    </Grid>
                     {isLoading ? (
                         <Grid item xs={12}>
                             <div className="flex flex-col items-center justify-center">
@@ -109,7 +147,8 @@ export default function BookAll() {
                         BookList.map((item, index) => (
                             <Grid item xs={12} md={3} key={index}>
                                 <Card
-                                    className="bg-primary bg-opacity-15 hover:border-2 border-2 border-transparent relative text-center flex flex-col rounded-md"
+                                    onClick={() => { if (!manage) { route.push(`/book/detail/${item?.id}`) } }}
+                                    className="cursor-pointer bg-primary bg-opacity-15 hover:border-2 border-2 border-transparent relative text-center flex flex-col rounded-md"
                                     sx={{ maxHeight: 680, minHeight: 680 }}
                                 >
                                     <Image
@@ -129,10 +168,11 @@ export default function BookAll() {
                                             {item.description.length > 150 ? item.description.slice(0, 150) + '...' : item.description}
                                         </span>
                                     </CardContent>
-                                    <CardActions className="mt-auto justify-start">
+                                    <CardActions className="mt-auto justify-between">
                                         <span className="text-gray-500 text-left text-[14px]">
                                             Tahun Terbit: {item.publication_year}
                                         </span>
+                                        {manage && <RowOptionsBook data={item} toggleManage={toggleManage} />}
                                     </CardActions>
                                 </Card>
                             </Grid>
@@ -143,8 +183,9 @@ export default function BookAll() {
                 </Grid>
             </Stack>
             {openModal &&
-                <FilterBookCategory open={openModal} toggle={toggle} form={form} />
+                <FilterBook open={openModal} toggle={toggle} form={form} />
             }
+            {openAdd && <AddBook open={openAdd} toggleManage={toggle} toggle={toggleAdd} />}
         </Container>
     )
 }

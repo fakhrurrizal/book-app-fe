@@ -13,7 +13,7 @@ interface Props {
 
 
 const optionSort = [
-    { id: "id", label: "Sort berdasarkan ID" },
+    { id: "title", label: "Sort berdasarkan Alfabet" },
     { id: "publication_year", label: "Sort berdasarkan Tahun Terbit" },
 ];
 
@@ -22,10 +22,9 @@ const optionOrder = [
     { id: "asc", label: "Urutkan dari Terkecil ke Terbesar" },
 ];
 
-const FilterBookCategory = ({ open, toggle, form }: Props) => {
+const FilterBook = ({ open, toggle, form }: Props) => {
 
     const submit = async (data: SchemaForm) => {
-        console.log("data", data)
         toggle();
     };
 
@@ -75,4 +74,4 @@ const FilterBookCategory = ({ open, toggle, form }: Props) => {
     );
 };
 
-export default FilterBookCategory;
+export default FilterBook;

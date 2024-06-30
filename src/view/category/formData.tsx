@@ -30,9 +30,6 @@ const FormDataCategory = ({ form }: Props) => {
             <Grid item xs={12}>
                 <TextField control={form.control} name="description" label="Deskripsi" />
             </Grid>
-            <Grid item xs={12}>
-                <SwitchComponent control={form.control} label="Status" name='status' />
-            </Grid>
         </Grid>
     )
 }

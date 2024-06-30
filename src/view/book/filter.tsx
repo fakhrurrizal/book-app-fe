@@ -13,7 +13,7 @@ interface Props {
 
 
 const optionSort = [
-    { id: "id", label: "Sort berdasarkan ID" },
+    { id: "title", label: "Sort berdasarkan Alfabet" },
     { id: "publication_year", label: "Sort berdasarkan Tahun Terbit" },
 ];
 
@@ -32,7 +32,7 @@ const FilterBook = ({ open, toggle, form }: Props) => {
         form.reset({
             category_id: { id: 0, label: "Semua Kategori" },
             order: { id: "desc", label: "Terbesar Ke Terkecil" },
-            sort: { id: "id", label: "Diurutkan Berdasarkan ID" },
+            sort: { id: "title", label: "Sort berdasarkan Alfabet" },
         });
         toggle();
     };

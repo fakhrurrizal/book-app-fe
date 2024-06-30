@@ -1,6 +1,7 @@
 export const endpoints = {
-    book : "book",
-    book_category : "book-category"
+    book: "book",
+    book_category: "book-category",
+    upload: 'file'
 } as const
 
 export type ApiEndpoint = keyof typeof endpoints

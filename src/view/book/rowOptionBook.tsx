@@ -1,22 +1,24 @@
-import { BookCategory } from "@/types/category-response.types"
+import { queryClient } from "@/pages/_app"
+import { DataBook } from "@/types/book-response.types"
+import { useDeleteBook } from "@/utils/mutations/use-book"
 import { Box, Typography } from "@mui/material"
 import { useState } from "react"
-import EditCategory from "./edit"
-import { useDeleteCategory } from "@/utils/mutations/use-category"
-import { queryClient } from "@/pages/_app"
+import EditBook from "./edit"
 import ModalDelete from "@/components/modal-delete"
 
 interface Props {
-    data: BookCategory
+    data: DataBook
+    toggleManage: () => void
 }
 
-const RowOptionsCategory = ({ data }: Props) => {
+const RowOptionsBook = ({ data, toggleManage }: Props) => {
 
-    const { mutateAsync: deleted_data } = useDeleteCategory(data?.id)
+    const { mutateAsync: deleted_data } = useDeleteBook(data?.id)
 
     const [editData, setEditData] = useState<boolean>(false)
 
     const toggleEdit = () => setEditData(!editData)
+
 
     const [openDelete, setOpenDelete] = useState<boolean>(false)
 
@@ -27,7 +29,7 @@ const RowOptionsCategory = ({ data }: Props) => {
     const onDelete = async () => {
         try {
             await deleted_data()
-            queryClient.invalidateQueries({ queryKey: ['LIST_BOOK_CATEGORY'] });
+            queryClient.invalidateQueries({ queryKey: ['LIST_BOOK'] });
             toggleDelete()
         } catch (error) {
             console.log("err", error)
@@ -43,12 +45,12 @@ const RowOptionsCategory = ({ data }: Props) => {
             <Box component="span" onClick={toggleDelete} sx={{ cursor: 'pointer' }} className="hover:text-primary">
                 <Typography>Hapus</Typography>
             </Box>
-            {editData && <EditCategory data={data} open={editData} toggle={toggleEdit} />}
+            {editData && <EditBook toggleManage={toggleManage} data={data} open={editData} toggle={toggleEdit} />}
             {openDelete && (
                 <ModalDelete
                     toggle={toggleDelete}
                     handleDelete={onDelete}
-                    name={data?.name}
+                    name={data?.title}
                     open={openDelete}
                 />
             )}
@@ -57,4 +59,4 @@ const RowOptionsCategory = ({ data }: Props) => {
 
 }
 
-export default RowOptionsCategory
+export default RowOptionsBook
