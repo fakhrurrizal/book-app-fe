@@ -5,7 +5,7 @@ import { useBookCategoryId } from "@/utils/queries/use-book-category";
 import AddBook from "@/view/book/add";
 import FilterBook from "@/view/book/filter";
 import RowOptionsBook from "@/view/book/rowOptionBook";
-import { Button, Card, CardActions, CardContent, CircularProgress, Container, Grid, IconButton, Stack, TextField } from "@mui/material";
+import { Button, Card, CardActions, CardContent, CircularProgress, Container, Grid, IconButton, Skeleton, Stack, TextField, Typography } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -97,6 +97,12 @@ export default function BookId() {
         }
     }, [ID, refetch, refetchCategory])
 
+    const [isExpanded, setIsExpanded] = useState(false);
+
+    const toggleReadMore = () => {
+        setIsExpanded(!isExpanded);
+    };
+
     return (
         <Container className="flex flex-col pt-2 mb-6 text-center relative">
             <div className="relative">
@@ -109,9 +115,25 @@ export default function BookId() {
                     <h1 className="text-4xl font-bold text-primary animate__animated animate__backInDown">
                         Pilih Buku {dataCategory?.name}
                     </h1>
-                    <p className="text-[16px] mt-3 animate__animated animate__fadeIn animate__delay-1s">
-                        {dataCategory?.description}
-                    </p>
+                    {isLoading ?
+                        <Skeleton variant="rectangular" width={"100%"} height={60} sx={{ marginTop: 2 }} />
+                        :
+                        <>
+                            <p className="text-[16px] mt-3 animate__animated animate__fadeIn animate__delay-1s">
+                                {isExpanded || Number(dataCategory?.description?.length) <= 160 ? dataCategory?.description : `${dataCategory?.description.slice(0, 160)}...`}
+                            </p>
+                            {Number(dataCategory?.description?.length) > 160 && (
+                                <Typography
+                                    component="span"
+                                    className="cursor-pointer text-primary"
+                                    onClick={toggleReadMore}
+                                >
+                                    {isExpanded ? ' Baca Lebih Sedikit' : ' Baca Selengkapnya'}
+                                </Typography>
+                            )}
+                        </>
+                    }
+
                 </div>
             </div>
 
@@ -140,7 +162,7 @@ export default function BookId() {
                         </IconButton>
                     </Grid>
                 </Grid>
-                <Grid container spacing={3} marginTop={4}>
+                <Grid container spacing={3} marginTop={BookList?.length > 0 ? 4 : 1}>
                     <Grid item xs={12} className="flex justify-end">
                         {manage && <Button onClick={toggleAdd} variant="outlined">Tambah Buku</Button>}
                     </Grid>
@@ -152,7 +174,7 @@ export default function BookId() {
                             </div>
                         </Grid>
                     ) : BookList && BookList.length > 0 ? (
-                        BookList.map((item, index) => (
+                        BookList?.map((item, index) => (
                             <Grid item xs={12} md={3} key={index}>
                                 <Card
                                     onClick={() => route.push(`/book/detail/${item?.id}`)}
