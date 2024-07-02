@@ -26,7 +26,7 @@ interface Props {
 
 const FormDataBook = ({ form, is_category = false, isEdit = false }: Props) => {
 
-
+    const [image, setImage] = useState(form.watch("image"))
 
     const { getRootProps, getInputProps } = useDropzone({
         multiple: false,
@@ -40,6 +40,7 @@ const FormDataBook = ({ form, is_category = false, isEdit = false }: Props) => {
                 const file = acceptedFiles[0];
 
                 form.setValue('image', file);
+                setImage(URL.createObjectURL(file))
                 form.clearErrors('image');
             } catch (error) {
                 console.error('Error handling dropped file:', error);
@@ -73,7 +74,7 @@ const FormDataBook = ({ form, is_category = false, isEdit = false }: Props) => {
     const img = () => {
 
         return !loadingImage ? (
-            <Image key={form.watch("title")} alt={form.watch("title")} width={80} height={120} src={isEdit ? form.watch("image") : URL.createObjectURL(form.watch("image"))} />
+            <Image key={form.watch("title")} alt={form.watch("title")} width={80} height={120} src={image} />
         ) : (
             <Box>
                 <CircularProgress size='1.3rem' />
