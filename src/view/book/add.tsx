@@ -22,7 +22,7 @@ const AddBook = ({ open, toggle, toggleManage, dataCategory }: Props) => {
 
     const form = useForm<BookForm>({
         defaultValues: {
-            title: "", image: "", author: "", book_code: "", category_id: null, description: "", language: "", number_of_pages: "", publication_year: "", publisher: "", status: true
+            title: "", image: "", author: "", book_code: "", category_id: null, description: "", language: "", number_of_pages: "", publication_year: "", publisher: "",
         },
         resolver: zodResolver(BookSchema)
     })
@@ -35,8 +35,6 @@ const AddBook = ({ open, toggle, toggleManage, dataCategory }: Props) => {
         }
     }, [dataCategory, form, form.reset])
 
-    console.log("form", form.getValues())
-
     const onSubmit = async (data: BookForm) => {
         const dataSubmit = objectClear<BookForm>(data)
 
@@ -44,6 +42,7 @@ const AddBook = ({ open, toggle, toggleManage, dataCategory }: Props) => {
             await add_data(dataSubmit)
             queryClient.invalidateQueries({ queryKey: ['LIST_BOOK'] });
             toggle()
+            form.reset()
             toggleManage()
         } catch (error) {
             console.log("error", error)

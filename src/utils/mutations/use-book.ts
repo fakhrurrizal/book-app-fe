@@ -11,7 +11,11 @@ export const useAddBook = () => {
     any
   >({
     mutationFn: async (data) =>
-      await axiosInterceptor.post<BookResponse>(getApi('book'), data),
+      await axiosInterceptor.post<BookResponse>(getApi('book'), data, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }),
     mutationKey: ['ADD_BOOK'],
   });
 };
@@ -23,7 +27,15 @@ export const useEditBook = (id: any) => {
     any
   >({
     mutationFn: async (data) =>
-      await axiosInterceptor.put<BookResponse>(getApi('book') + '/' + id, data),
+      await axiosInterceptor.put<BookResponse>(
+        getApi('book') + '/' + id,
+        data,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      ),
     mutationKey: ['EDIT_BOOK'],
   });
 };

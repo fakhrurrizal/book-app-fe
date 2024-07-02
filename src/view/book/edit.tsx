@@ -22,7 +22,7 @@ const EditBook = ({ open, toggle, toggleManage, data }: Props) => {
 
     const form = useForm<BookForm>({
         defaultValues: {
-            title: "", image: "", author: "", book_code: "", category_id: null, description: "", language: "", number_of_pages: "", publication_year: "", publisher: "", status: true
+            title: "", image: "", author: "", book_code: "", category_id: null, description: "", language: "", number_of_pages: "", publication_year: "", publisher: "",
         },
         resolver: zodResolver(BookSchema)
     })
@@ -56,9 +56,14 @@ const EditBook = ({ open, toggle, toggleManage, data }: Props) => {
 
     }
 
+    const handleClose = () => {
+        toggle()
+        form.reset()
+    }
+
     return (
-        <ModalCustom open={open} toggle={toggle} maxWidth="md" title={`Edit Buku `} buttonOkProps={{ onClick: form.handleSubmit(onSubmit) }}>
-            <FormDataCategory form={form} />
+        <ModalCustom open={open} toggle={handleClose} maxWidth="md" title={`Edit Buku `} buttonOkProps={{ onClick: form.handleSubmit(onSubmit) }}>
+            <FormDataCategory form={form} isEdit />
         </ModalCustom>
     )
 }

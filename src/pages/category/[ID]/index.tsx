@@ -177,7 +177,7 @@ export default function BookId() {
                         BookList?.map((item, index) => (
                             <Grid item xs={12} md={3} key={index}>
                                 <Card
-                                    onClick={() => route.push(`/book/detail/${item?.id}`)}
+                                    onClick={() => { if (!manage) { route.push(`/book/detail/${item?.id}`) } }}
                                     className=" cursor-pointer bg-primary bg-opacity-15 hover:border-2 border-2 border-transparent relative text-center flex flex-col rounded-md"
                                     sx={{ maxHeight: 680, minHeight: 680 }}
                                 >

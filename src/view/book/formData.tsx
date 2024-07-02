@@ -20,10 +20,11 @@ import { BookCategoryResponse } from "@/types/category-response.types"
 interface Props {
     form: UseFormReturn<BookForm>
     is_category?: boolean
+    isEdit?: boolean
 }
 
 
-const FormDataBook = ({ form, is_category = false }: Props) => {
+const FormDataBook = ({ form, is_category = false, isEdit = false }: Props) => {
 
 
 
@@ -33,48 +34,46 @@ const FormDataBook = ({ form, is_category = false }: Props) => {
         accept: {
             'image/*': ['.png', '.jpg', '.jpeg', '.gif']
         },
-        onDrop: async (acceptedFiles: File[]) => {
-            // setFiles(acceptedFiles.map((file: File) => Object.assign(file)))
-            await uploadImage(acceptedFiles[0])
-            form.clearErrors('image')
+        onDrop: async (acceptedFiles: any) => {
+            setLoadingImage(true);
+            try {
+                const file = acceptedFiles[0];
+
+                form.setValue('image', file);
+                form.clearErrors('image');
+            } catch (error) {
+                console.error('Error handling dropped file:', error);
+                toast.error('Failed to handle dropped file.');
+            } finally {
+                setLoadingImage(false);
+            }
         },
         onDropRejected: () => {
-            toast.error(' ukuran maksimal 5 MB.')
+            toast.error('Ukuran maksimal 5 MB. Jenis file yang diperbolehkan: *.jpeg, *.jpg, *.png, *.gif');
         }
-    })
-
+    });
     const [loadingImage, setLoadingImage] = useState<boolean>(false)
 
-    const uploadImage = async (file: File) => {
-        try {
-            const formData = new FormData()
+    // const uploadImage = async (file: File) => {
+    //     console.log("file", file)
+    //     try {
+    //         const formData = new FormData()
 
-            formData.append('file', file)
-            formData.append('name', '')
+    //         formData.append('file', file)
+    //         formData.append('name', '')
 
-            setLoadingImage(true)
-            const response = await axiosInterceptor.post<ResponseUploadFile>(
-                getApi('upload'),
-                formData,
-                {
-                    headers: {
-                        'Content-Type': 'application/image'
-                    }
-                }
-            )
-            setLoadingImage(false)
-            const { full_url } = response.data.data
-            form.setValue('image', full_url)
-            form.clearErrors('image')
-        } catch (error) {
-            console.log("error")
-            setLoadingImage(false)
-        }
-    }
+    //         form.setValue('image', file)
+    //         form.clearErrors('image')
+    //     } catch (error) {
+    //         console.log("error")
+    //         setLoadingImage(false)
+    //     }
+    // }
 
     const img = () => {
+
         return !loadingImage ? (
-            <Image key={form.watch("title")} alt={form.watch("title")} width={80} height={120} src={form.watch("image")} />
+            <Image key={form.watch("title")} alt={form.watch("title")} width={80} height={120} src={isEdit ? form.watch("image") : URL.createObjectURL(form.watch("image"))} />
         ) : (
             <Box>
                 <CircularProgress size='1.3rem' />
@@ -100,7 +99,7 @@ const FormDataBook = ({ form, is_category = false }: Props) => {
                         >
                             <input {...getInputProps()} />
 
-                            {form.watch("image")?.length ? (
+                            {form.watch("image") || form.watch("image")?.name?.length ? (
                                 <Box
                                     sx={{
                                         display: 'flex',
@@ -160,7 +159,7 @@ const FormDataBook = ({ form, is_category = false }: Props) => {
                     </div>
                 </DropzoneWrapper>
 
-                {form.formState.errors?.image && <FormHelperText sx={{ color: 'error.main' }}>{form.formState.errors.image.message}</FormHelperText>}
+                {form.formState.errors?.image && <FormHelperText sx={{ color: 'error.main' }}>{form.formState.errors.image.message?.toString()}</FormHelperText>}
             </Grid>
             <Grid item xs={12}>
                 <TextField control={form.control} name="book_code" label="Kode Buku" placeholder="Masukan Kode Buku" />
