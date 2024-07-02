@@ -215,7 +215,7 @@ export default function BookId() {
             {openModal &&
                 <FilterBook open={openModal} toggle={toggle} form={form} />
             }
-            {openAdd && <AddBook dataCategory={dataCategory} open={openAdd} toggleManage={toggle} toggle={toggleAdd} />}
+            {openAdd && <AddBook dataCategory={dataCategory} open={openAdd} toggleManage={toggleManage} toggle={toggleAdd} />}
         </Container>
     )
 }

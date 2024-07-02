@@ -18,7 +18,7 @@ interface Props {
 
 const AddBook = ({ open, toggle, toggleManage, dataCategory }: Props) => {
 
-    const { mutateAsync: add_data } = useAddBook()
+    const { mutateAsync: add_data, isLoading } = useAddBook()
 
     const form = useForm<BookForm>({
         defaultValues: {
@@ -40,9 +40,9 @@ const AddBook = ({ open, toggle, toggleManage, dataCategory }: Props) => {
 
         try {
             await add_data(dataSubmit)
+            form.reset()
             queryClient.invalidateQueries({ queryKey: ['LIST_BOOK'] });
             toggle()
-            form.reset()
             toggleManage()
         } catch (error) {
             console.log("error", error)
@@ -51,7 +51,7 @@ const AddBook = ({ open, toggle, toggleManage, dataCategory }: Props) => {
     }
 
     return (
-        <ModalCustom open={open} toggle={toggle} maxWidth="md" title="Tambah Buku" buttonOkProps={{ onClick: form.handleSubmit(onSubmit) }}>
+        <ModalCustom open={open} toggle={toggle} maxWidth="md" title="Tambah Buku" isLoading buttonOkProps={{ onClick: form.handleSubmit(onSubmit) }}>
             <FormDataCategory form={form} is_category={Number(dataCategory?.id) > 0} />
         </ModalCustom>
     )

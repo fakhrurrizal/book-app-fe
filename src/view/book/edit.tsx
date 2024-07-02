@@ -18,7 +18,7 @@ interface Props {
 
 const EditBook = ({ open, toggle, toggleManage, data }: Props) => {
 
-    const { mutateAsync: add_data } = useEditBook(data?.id)
+    const { mutateAsync: add_data, isLoading } = useEditBook(data?.id)
 
     const form = useForm<BookForm>({
         defaultValues: {
@@ -62,7 +62,7 @@ const EditBook = ({ open, toggle, toggleManage, data }: Props) => {
     }
 
     return (
-        <ModalCustom open={open} toggle={handleClose} maxWidth="md" title={`Edit Buku `} buttonOkProps={{ onClick: form.handleSubmit(onSubmit) }}>
+        <ModalCustom open={open} toggle={handleClose} maxWidth="md" title={`Edit Buku `} isLoading buttonOkProps={{ onClick: form.handleSubmit(onSubmit) }}>
             <FormDataCategory form={form} isEdit />
         </ModalCustom>
     )
