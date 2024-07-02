@@ -19,16 +19,14 @@ export const BookSchema = z
         }
       }),
     description: z.string().min(1, { message: 'Sinopsis Wajib Diisi' }),
-     image: z.any()
-    .refine((file) => {
-      const acceptedTypes = ['image/png', 'image/jpeg', 'image/gif'];
-      return acceptedTypes.includes(file.type);
-    }, {
-      message: 'File harus berupa gambar (PNG, JPEG, atau GIF)',
-    }),
+    image: z.any(),
     language: z.string().min(1, { message: 'Bahasa Wajib Diisi' }),
-    number_of_pages: z.string().min(1, { message: 'Jumlah Halaman Wajib Diisi' }),
-    publication_year: z.string().min(1, { message: 'Tahun Terbit Wajib Diisi' }),
+    number_of_pages: z
+      .string()
+      .min(1, { message: 'Jumlah Halaman Wajib Diisi' }),
+    publication_year: z
+      .string()
+      .min(1, { message: 'Tahun Terbit Wajib Diisi' }),
     publisher: z.string().min(1, { message: 'Penerbit Wajib Diisi' }),
     title: z.string().min(1, { message: 'Judul Wajib Diisi' }),
   })
