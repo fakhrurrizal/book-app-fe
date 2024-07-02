@@ -19,7 +19,7 @@ export const BookSchema = z
         }
       }),
     description: z.string().min(1, { message: 'Sinopsis Wajib Diisi' }),
-    image: z.any(),
+    image: z.any().optional(),
     language: z.string().min(1, { message: 'Bahasa Wajib Diisi' }),
     number_of_pages: z
       .string()
