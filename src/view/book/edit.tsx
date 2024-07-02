@@ -62,7 +62,7 @@ const EditBook = ({ open, toggle, toggleManage, data }: Props) => {
     }
 
     return (
-        <ModalCustom open={open} toggle={handleClose} maxWidth="md" title={`Edit Buku `} isLoading buttonOkProps={{ onClick: form.handleSubmit(onSubmit) }}>
+        <ModalCustom open={open} toggle={handleClose} maxWidth="md" title={`Edit Buku `} isLoading={isLoading} buttonOkProps={{ onClick: form.handleSubmit(onSubmit) }}>
             <FormDataCategory form={form} isEdit />
         </ModalCustom>
     )

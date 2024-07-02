@@ -51,7 +51,7 @@ const AddBook = ({ open, toggle, toggleManage, dataCategory }: Props) => {
     }
 
     return (
-        <ModalCustom open={open} toggle={toggle} maxWidth="md" title="Tambah Buku" isLoading buttonOkProps={{ onClick: form.handleSubmit(onSubmit) }}>
+        <ModalCustom open={open} toggle={toggle} maxWidth="md" title="Tambah Buku" isLoading={isLoading} buttonOkProps={{ onClick: form.handleSubmit(onSubmit) }}>
             <FormDataCategory form={form} is_category={Number(dataCategory?.id) > 0} />
         </ModalCustom>
     )
