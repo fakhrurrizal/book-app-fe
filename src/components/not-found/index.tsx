@@ -18,7 +18,7 @@ const DataNotFound = ({ maxWidth = '40%' }: Props) => {
             }}
         >
             <img src="/not-found.png" alt="No Data" style={{ maxWidth: maxWidth, height: 'auto', marginTop: -7 }} />
-            <Typography variant="h6" marginTop={-7} >
+            <Typography variant="h6" sx={{ marginTop: { md: -7, xs: 0 } }}  >
                 Data tidak ditemukan
             </Typography>
         </Box >

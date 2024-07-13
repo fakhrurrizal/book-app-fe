@@ -106,8 +106,8 @@ export default function BookAll() {
                 </div>
             </div>
             <Stack className="animate__animated animate__fadeIn animate__delay-2s">
-                <Grid container spacing={3} marginTop={4}>
-                    <Grid item xs={10.5}>
+                <Grid container spacing={2} marginTop={4} >
+                    <Grid item xs={8.5} md={10.5}>
                         <TextField
                             size='small'
                             name='search'
@@ -117,10 +117,10 @@ export default function BookAll() {
                             variant='outlined'
                         />
                     </Grid>
-                    <Grid item xs={0.9} marginTop={-1}>
+                    <Grid item xs={1} md={0.9} marginTop={-1}>
                         <IconButton onClick={toggle}><Icon icon={'ion:filter'} className="text-3xl text-secondary" /></IconButton>
                     </Grid>
-                    <Grid item xs={0.5} marginTop={-1} className="flex justify-end ">
+                    <Grid item xs={1.5} md={0.5} marginTop={-1} className="flex justify-end ml-7">
                         <IconButton onClick={toggleManage}>
                             {manage ?
                                 <Icon icon={'carbon:close-outline'} className="text-3xl text-secondary" style={{ fontWeight: 800 }} />
