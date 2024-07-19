@@ -50,8 +50,6 @@ export default function BookAll() {
 
     const [searchValue, setSearchValue] = useState('')
 
-    const [page, setPage] = useState(1)
-
     const route = useRouter()
 
     const [openModal, setOpenModal] = useState<boolean>(false)
@@ -60,7 +58,6 @@ export default function BookAll() {
 
     const [manage, setManage] = useState<boolean>(false)
 
-    const [pageSize, setPageSize] = useState(8)
 
     const toggleManage = () => setManage(!manage)
 
@@ -68,26 +65,16 @@ export default function BookAll() {
 
     const toggleAdd = () => setOpenAdd(!openAdd)
 
-    const handlePageChange = (event: any, newPage: number) => {
-        setPage(newPage)
-    }
-
-    const handleLimitChange = useCallback((e: SelectChangeEvent) => {
-        setPageSize(parseInt(e.target.value, 10))
-    }, [])
 
     const form = useForm<SchemaForm>({
         defaultValues: {
             category_id: { id: 0, label: "Semua Kategori" },
-            order: { id: "desc", label: "" },
+            order: { id: "desc", label: "Urutkan dari Terbesar ke Terkecil" },
             sort: { id: "id", label: "" },
         }
     });
 
-    const { data: { data: BookList = [], recordsFiltered = 0 } = { data: [] }, isLoading } = useBook({
-        pageSize: pageSize,
-        searchValue: "",
-        pageIndex: page,
+    const { data: { data: BookList = [], } = { data: [] }, isLoading } = useBook({
         search: searchValue,
         categoryId: form.watch("category_id.id") ?? "",
         order: form.watch("order.id") ?? "",
@@ -191,7 +178,7 @@ export default function BookAll() {
                     ) : (
                         <DataNotFound />
                     )}
-                    <Grid item xs={12} marginTop={4}>
+                    {/* <Grid item xs={12} marginTop={4}>
                         <PaginationSectionTableCustom
                             page={page}
                             pageSize={pageSize}
@@ -199,7 +186,7 @@ export default function BookAll() {
                             handleLimitChange={handleLimitChange}
                             handlePageChange={handlePageChange}
                         />
-                    </Grid>
+                    </Grid> */}
                 </Grid>
             </Stack>
             {openModal &&
