@@ -9,13 +9,17 @@ interface PaginationMuiProps {
 }
 const PaginationMui: React.FC<PaginationMuiProps> = ({ total, page, pageSize, onPageChange }) => {
     return (
-        <Pagination
-            count={Math.ceil(total / pageSize)}
-            page={page}
-            onChange={onPageChange}
-            shape='rounded'
-            color='primary'
-        />
+        <>
+            {total ? (
+                <Pagination
+                    count={Math.ceil(total / pageSize)}
+                    page={page}
+                    onChange={onPageChange}
+                    shape='rounded'
+                    color='primary'
+                />
+            ) : null}
+        </>
     )
 }
 

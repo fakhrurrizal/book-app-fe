@@ -1,13 +1,14 @@
 import Icon from "@/components/icon";
 import DataNotFound from "@/components/not-found";
+import PaginationSectionTableCustom from "@/components/pagination";
 import { useBook } from "@/utils";
 import AddBook from "@/view/book/add";
 import FilterBook from "@/view/book/filter";
 import RowOptionsBook from "@/view/book/rowOptionBook";
-import { Button, Card, CardActions, CardContent, CircularProgress, Container, Grid, IconButton, Stack, TextField } from "@mui/material";
+import { Button, Card, CardActions, CardContent, CircularProgress, Container, Grid, IconButton, SelectChangeEvent, Stack, TextField } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -49,6 +50,8 @@ export default function BookAll() {
 
     const [searchValue, setSearchValue] = useState('')
 
+    const [page, setPage] = useState(1)
+
     const route = useRouter()
 
     const [openModal, setOpenModal] = useState<boolean>(false)
@@ -57,11 +60,21 @@ export default function BookAll() {
 
     const [manage, setManage] = useState<boolean>(false)
 
+    const [pageSize, setPageSize] = useState(8)
+
     const toggleManage = () => setManage(!manage)
 
     const toggle = () => setOpenModal(!openModal)
 
     const toggleAdd = () => setOpenAdd(!openAdd)
+
+    const handlePageChange = (event: any, newPage: number) => {
+        setPage(newPage)
+    }
+
+    const handleLimitChange = useCallback((e: SelectChangeEvent) => {
+        setPageSize(parseInt(e.target.value, 10))
+    }, [])
 
     const form = useForm<SchemaForm>({
         defaultValues: {
@@ -71,10 +84,10 @@ export default function BookAll() {
         }
     });
 
-    const { data: { data: BookList = [], } = { data: [] }, isLoading } = useBook({
-        pageSize: 50,
+    const { data: { data: BookList = [], recordsFiltered = 0 } = { data: [] }, isLoading } = useBook({
+        pageSize: pageSize,
         searchValue: "",
-        pageIndex: 1,
+        pageIndex: page,
         search: searchValue,
         categoryId: form.watch("category_id.id") ?? "",
         order: form.watch("order.id") ?? "",
@@ -84,8 +97,6 @@ export default function BookAll() {
     const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchValue(event.target.value)
     }
-
-    console.log("tesss", form.watch("sort.id"))
 
 
     return (
@@ -107,7 +118,7 @@ export default function BookAll() {
             </div>
             <Stack className="animate__animated animate__fadeIn animate__delay-2s">
                 <Grid container spacing={2} marginTop={4} >
-                    <Grid item xs={8.5} md={10.5}>
+                    <Grid item xs={10} md={10.5}>
                         <TextField
                             size='small'
                             name='search'
@@ -120,7 +131,7 @@ export default function BookAll() {
                     <Grid item xs={1} md={0.9} marginTop={-1}>
                         <IconButton onClick={toggle}><Icon icon={'ion:filter'} className="text-3xl text-secondary" /></IconButton>
                     </Grid>
-                    <Grid item xs={1.5} md={0.5} marginTop={-1} className="flex justify-end ml-7">
+                    <Grid item xs={1.5} md={0.5} marginTop={-1} className=" justify-end hidden md:flex">
                         <IconButton onClick={toggleManage}>
                             {manage ?
                                 <Icon icon={'carbon:close-outline'} className="text-3xl text-secondary" style={{ fontWeight: 800 }} />
@@ -180,6 +191,15 @@ export default function BookAll() {
                     ) : (
                         <DataNotFound />
                     )}
+                    <Grid item xs={12} marginTop={4}>
+                        <PaginationSectionTableCustom
+                            page={page}
+                            pageSize={pageSize}
+                            recordsFiltered={recordsFiltered}
+                            handleLimitChange={handleLimitChange}
+                            handlePageChange={handlePageChange}
+                        />
+                    </Grid>
                 </Grid>
             </Stack>
             {openModal &&

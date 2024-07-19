@@ -46,7 +46,7 @@ export default function Category() {
             </p>
             <Stack>
                 <Grid container spacing={3}>
-                    <Grid item xs={12} className="flex justify-end animate__animated animate__fadeIn animate__delay-1s">
+                    <Grid item xs={12} className="justify-end animate__animated animate__fadeIn animate__delay-1s hidden md:flex">
                         <IconButton onClick={toggleManage}>
                             {manage ?
                                 <Icon icon={'carbon:close-outline'} className="text-3xl text-secondary" style={{ fontWeight: 800 }} />
@@ -55,6 +55,8 @@ export default function Category() {
                             }
                         </IconButton>
                     </Grid>
+
+
                     {manage &&
                         <Grid item xs={12} md={4} className="animate__animated animate__fadeIn">
                             <Card sx={({ palette }) => ({ background: alpha(palette.primary.main, 0.3) })} onClick={toggle} className=" cursor-pointer  h-[220px] border-2 border-primary relative px-5 py-8 m-2 text-center flex flex-col rounded-3xl items-center justify-center">

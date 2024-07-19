@@ -1,18 +1,18 @@
-import React from 'react'
+import React from 'react';
 
 const EntriesText = ({ currentPage, pageSize, totalEntries }) => {
-    const startEntry = (currentPage - 1) * pageSize + 1
-    const endEntry = Math.min(currentPage * pageSize, totalEntries)
-    const textStyle = {
-        fontSize: '.81rem',
-        color: '#a5a3ae',
-    }
+  const startEntry = totalEntries ? (currentPage - 1) * pageSize + 1 : 0;
+  const endEntry = Math.min(currentPage * pageSize, totalEntries);
 
-    return (
-        <p style={textStyle}>
-            Menampilkan {startEntry} sampai {endEntry} dari {totalEntries} data
+  return (
+    <>
+      {totalEntries ? (
+        <p className="font-[.81rem] text-slate-700">
+          Menampilkan {startEntry} sampai {endEntry} dari {totalEntries} data
         </p>
-    )
-}
+      ) : null}
+    </>
+  );
+};
 
-export default EntriesText
+export default EntriesText;
