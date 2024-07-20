@@ -192,7 +192,7 @@ export default function BookAll() {
             {openModal &&
                 <FilterBook open={openModal} toggle={toggle} form={form} />
             }
-            {openAdd && <AddBook open={openAdd} toggleManage={toggle} toggle={toggleAdd} />}
+            {openAdd && <AddBook open={openAdd} toggleManage={toggleManage} toggle={toggleAdd} />}
         </Container>
     )
 }
