@@ -1,7 +1,7 @@
 ## Project Book App List
 
-![Project Logo](/image-1.png)
-![Project](/image-2.png)
+![Project Logo](./public/image-1.png)
+![Project](./public/image-2.png)
 
 ## List Anggota
 
