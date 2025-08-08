@@ -184,7 +184,7 @@ const HistoryListPageViews = () => {
                                                                             ? 'Dikembalikan'
                                                                             : item?.status === 'overdue'
                                                                                 ? 'Terlambat'
-                                                                                : '-'}
+                                                                                : 'Dibatalkan'}
                                                     </span>
 
                                                 </CustomStyledTableData>
