@@ -1,4 +1,5 @@
-import { EntriesText, PaginationMui } from '@/components/mui'
+import EntriesText from '@/components/table/EntriesText'
+import PaginationMui from '@/components/table/PaginationMui'
 import { FormControl, MenuItem, Select, SelectChangeEvent } from '@mui/material'
 
 interface Props {
