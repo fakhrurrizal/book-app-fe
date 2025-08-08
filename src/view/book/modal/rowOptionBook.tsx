@@ -45,7 +45,7 @@ const RowOptionsBook = ({ data, toggleManage }: Props) => {
             <Box component="span" onClick={toggleDelete} sx={{ cursor: 'pointer' }} className="hover:text-primary">
                 <Typography>Hapus</Typography>
             </Box>
-            {editData && <EditBook toggleManage={toggleManage} data={data} open={editData} toggle={toggleEdit} />}
+            {editData && <EditBook data={data} open={editData} toggle={toggleEdit} />}
             {openDelete && (
                 <ModalDelete
                     toggle={toggleDelete}
