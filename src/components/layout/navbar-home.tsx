@@ -108,7 +108,7 @@ const NavbarHome = ({ children }: { children: ReactNode }) => {
                     <Container maxWidth='lg'>
                         <Toolbar disableGutters sx={{ py: 0 }}>
                             <Box className='flex justify-center items-center mb-3'>
-                                <Image src='/Logo.png' alt='Logo' width={70} height={70} />
+                                <Image src='/logo.png' alt='Logo' width={70} height={70} />
                             </Box>
 
                             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, alignItems: 'center' }}>
@@ -352,7 +352,7 @@ const NavbarHome = ({ children }: { children: ReactNode }) => {
                     <Toolbar disableGutters sx={{ py: 0 }}>
                         <Box className='flex justify-center items-center mb-3 pt-3'>
                             <div className="w-[60px] h-[60px] border-2 p-1 border-primary rounded-full overflow-hidden">
-                                <Image src="/Logo.png" alt="Logo" width={60} height={60} />
+                                <Image src="/logo.png" alt="Logo" width={60} height={60} />
                             </div>
                         </Box>
                         <Box className='ps-10' sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, alignItems: 'center' }}>

@@ -21,7 +21,7 @@ export const LogoForAppBar = () => {
         >
             <Box>
                 <div className="w-[60px] h-[60px] border-2 p-1 border-primary rounded-full overflow-hidden">
-                    <Image src="/Logo.png" alt="Logo" width={60} height={60} />
+                    <Image src="/logo.png" alt="Logo" width={60} height={60} />
                 </div>
             </Box>
         </Box>
