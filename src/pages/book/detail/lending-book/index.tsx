@@ -132,7 +132,6 @@ const LendingBookView = ({ open, toggle, data }: Props) => {
                         </Box>
                     </Box>
 
-                    {/* Availability Status */}
                     <Box className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
                         <Box className="flex items-center justify-between">
                             <Box className="flex items-center gap-2">
@@ -147,7 +146,6 @@ const LendingBookView = ({ open, toggle, data }: Props) => {
                         </Box>
                     </Box>
 
-                    {/* Loan Form */}
                     <Box className="mb-6">
                         <Typography variant="h6" className="text-primary font-semibold mb-4">
                             Informasi Peminjam
