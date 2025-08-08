@@ -1,7 +1,11 @@
 export const endpoints = {
+    get_me: 'auth/user',
     book: "book",
     book_category: "book-category",
-    upload: 'file'
+    upload: 'file',
+    login: 'auth/signin',
+    register: 'auth/signup',
+    book_lending: 'book-lending',
 } as const
 
 export type ApiEndpoint = keyof typeof endpoints

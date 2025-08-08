@@ -1,9 +1,10 @@
 import { alpha, createTheme } from '@mui/material/styles';
 import { useMemo } from 'react';
 
-
 export const useGetTheme = () => {
   const primary = '#89c75f';
+
+  const primaryHover = '#77b34f';
 
   const error = '#ff3a6e';
 
@@ -65,17 +66,62 @@ export const useGetTheme = () => {
         },
 
         typography: {
-          fontSize: 10.5,
+          fontSize: 13,
 
           fontWeightRegular: 500,
 
           allVariants: {
-            fontFamily: '"Poppins", sans-serif',
+            fontFamily: '"Montserrat", sans-serif',
+            // fontFamily: '"Source Sans 3", sans-serif',
             color: fontColor,
           },
         },
 
         components: {
+          MuiContainer: {
+            styleOverrides: {
+              root: {
+                paddingLeft: '16px',
+                paddingRight: '16px',
+              },
+            },
+            defaultProps: {
+              maxWidth: 'lg',
+            },
+            variants: [
+              {
+                props: { maxWidth: 'xs' },
+                style: {
+                  maxWidth: '444px',
+                },
+              },
+              {
+                props: { maxWidth: 'sm' },
+                style: {
+                  maxWidth: '672px',
+                },
+              },
+              {
+                props: { maxWidth: 'md' },
+                style: {
+                  maxWidth: '900px',
+                },
+              },
+              {
+                props: { maxWidth: 'lg' },
+                style: {
+                  maxWidth: '1200px',
+                },
+              },
+              {
+                props: { maxWidth: 'xl' },
+                style: {
+                  maxWidth: '1536px',
+                },
+              },
+            ],
+          },
+
           MuiTextField: {
             styleOverrides: {
               root: {
@@ -109,8 +155,49 @@ export const useGetTheme = () => {
               root: {
                 boxShadow: 'none',
                 textTransform: 'none',
-                ':hover': {
+                fontSize: '14px',
+                fontWeight: 600,
+                padding: '6px 16px',
+                '&:hover': {
                   boxShadow: 'none',
+                },
+              },
+              contained: {
+                backgroundColor: primary,
+                color: '#fff',
+                '&:hover': {
+                  backgroundColor: primaryHover,
+                },
+              },
+              outlined: {
+                backgroundColor: 'transparent',
+                color: primary,
+                borderColor: primary,
+                '&:hover': {
+                  backgroundColor: primaryHover,
+                  borderColor: primaryHover,
+                  color: '#fff',
+                },
+              },
+              text: {
+                color: primary,
+                '&:hover': {
+                  backgroundColor: primaryHover,
+                  color: '#fff',
+                },
+              },
+            },
+          },
+          MuiIconButton: {
+            styleOverrides: {
+              root: {
+                color: primary,
+                borderRadius: '6px',
+                padding: '8px',
+                transition: 'background-color 0.2s ease',
+                '&:hover': {
+                  backgroundColor: 'rgba(255, 145, 77, 0.08)',
+                  borderColor: primary,
                 },
               },
             },
@@ -195,9 +282,19 @@ export const useGetTheme = () => {
 
           MuiTooltip: {
             defaultProps: {
-              placement: 'top',
-              sx: {
-                fontSize: '0.8rem',
+              placement: 'bottom',
+            },
+            styleOverrides: {
+              tooltip: {
+                fontSize: '13px',
+                padding: '8px 12px',
+                backgroundColor: 'rgba(97, 97, 97, 0.92)',
+                borderRadius: '4px',
+                fontWeight: 400,
+                lineHeight: 1.5,
+              },
+              arrow: {
+                color: 'rgba(97, 97, 97, 0.92)',
               },
             },
           },
@@ -217,6 +314,16 @@ export const useGetTheme = () => {
                   paddingBottom: '16px',
                 },
               },
+            },
+          },
+
+          MuiAutocomplete: {
+            styleOverrides: {
+              tag: ({ ownerState }) => ({
+                ...(ownerState.size === 'small' && {
+                  height: '22px',
+                }),
+              }),
             },
           },
         },

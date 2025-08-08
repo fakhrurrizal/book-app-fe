@@ -1,14 +1,14 @@
 import Icon from "@/components/icon";
+import { getHomeNavbarLayout } from "@/components/navbar-layout";
 import DataNotFound from "@/components/not-found";
-import PaginationSectionTableCustom from "@/components/pagination";
 import { useBook } from "@/utils";
-import AddBook from "@/view/book/add";
-import FilterBook from "@/view/book/filter";
-import RowOptionsBook from "@/view/book/rowOptionBook";
-import { Button, Card, CardActions, CardContent, CircularProgress, Container, Grid, IconButton, SelectChangeEvent, Stack, TextField } from "@mui/material";
+import { NextPageWithLayout } from "@/utils/helpers/getLayout";
+import FilterBook from "@/view/book/modal/filter";
+import RowOptionsBook from "@/view/book/modal/rowOptionBook";
+import { Button, Card, CardActions, CardContent, CircularProgress, Container, Grid, IconButton, Stack, TextField } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -46,7 +46,7 @@ export const schema = z.object({
 export type SchemaForm = z.infer<typeof schema>;
 
 
-export default function BookAll() {
+const BookAll: NextPageWithLayout = () => {
 
     const [searchValue, setSearchValue] = useState('')
 
@@ -118,15 +118,7 @@ export default function BookAll() {
                     <Grid item xs={1} md={0.9} marginTop={-1}>
                         <IconButton onClick={toggle}><Icon icon={'ion:filter'} className="text-3xl text-secondary" /></IconButton>
                     </Grid>
-                    <Grid item xs={1.5} md={0.5} marginTop={-1} className=" justify-end hidden md:flex">
-                        <IconButton onClick={toggleManage}>
-                            {manage ?
-                                <Icon icon={'carbon:close-outline'} className="text-3xl text-secondary" style={{ fontWeight: 800 }} />
-                                :
-                                <Icon icon={'ep:setting'} className="text-3xl text-secondary" style={{ fontWeight: 800 }} />
-                            }
-                        </IconButton>
-                    </Grid>
+
                 </Grid>
                 <Grid container spacing={3} marginTop={2}>
 
@@ -142,35 +134,46 @@ export default function BookAll() {
                             </div>
                         </Grid>
                     ) : BookList && BookList.length > 0 ? (
-                        BookList.map((item, index) => (
+                        BookList?.map((item, index) => (
                             <Grid item xs={12} md={3} key={index}>
                                 <Card
-                                    onClick={() => { if (!manage) { route.push(`/book/detail/${item?.id}`) } }}
-                                    className="cursor-pointer bg-primary bg-opacity-15 hover:border-2 border-2 border-transparent relative text-center flex flex-col rounded-md"
-                                    sx={{ maxHeight: 680, minHeight: 680 }}
+                                    className=" bg-primary bg-opacity-15 hover:border-2 border-2 border-transparent relative text-center flex flex-col rounded-md"
+                                    sx={{ maxHeight: 620, minHeight: 620 }}
                                 >
                                     <Image
                                         src={item.image || '/default-book-image.jpg'}
                                         alt={item.title}
                                         width={100}
                                         height={200}
-                                        style={{ width: '100%', maxHeight: 400, minHeight: 400 }}
+                                        style={{ width: '100%', maxHeight: 380, minHeight: 380 }}
                                         objectFit="cover"
                                         className="rounded-md"
                                     />
-                                    <CardContent className="flex flex-col">
+
+                                    <CardContent className="flex flex-col flex-1 px-4">
                                         <span className="font-semibold text-left text-gray-800 text-[18px] min-h-14">
-                                            {item.title.length > 45 ? item.title.slice(0, 45) + '...' : item.title}
+                                            {item.title.length > 40 ? item.title.slice(0, 40) + '...' : item.title}
                                         </span>
-                                        <span className="text-gray-600 text-left mt-2 text-[14px]">
-                                            {item.description.length > 150 ? item.description.slice(0, 150) + '...' : item.description}
+
+                                        <span className="text-gray-600 text-left mt-2 text-[14px] line-clamp-2">
+                                            {item.description.length > 120 ? item.description.slice(0, 120) + '...' : item.description}
                                         </span>
-                                    </CardContent>
-                                    <CardActions className="mt-auto justify-between">
-                                        <span className="text-gray-500 text-left text-[14px]">
+
+                                        <span className="text-gray-500 text-left text-[14px] mt-2">
                                             Tahun Terbit: {item.publication_year}
                                         </span>
-                                        {manage && <RowOptionsBook data={item} toggleManage={toggleManage} />}
+                                    </CardContent>
+
+                                    <CardActions className="px-4 pb-4">
+                                        <button
+                                            className="w-full text-sm font-semibold bg-primary text-white py-2 rounded hover:bg-[#5db93b] transition"
+                                            onClick={(e) => {
+                                                e.stopPropagation()
+                                                route.push(`/book/detail/${item?.id}`)
+                                            }}
+                                        >
+                                            Lihat Detail
+                                        </button>
                                     </CardActions>
                                 </Card>
                             </Grid>
@@ -192,7 +195,9 @@ export default function BookAll() {
             {openModal &&
                 <FilterBook open={openModal} toggle={toggle} form={form} />
             }
-            {openAdd && <AddBook open={openAdd} toggleManage={toggleManage} toggle={toggleAdd} />}
         </Container>
     )
 }
+
+BookAll.getLayout = getHomeNavbarLayout
+export default BookAll

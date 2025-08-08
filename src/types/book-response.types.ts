@@ -27,9 +27,11 @@ export interface DataBook {
   publisher: string;
   image: string;
   publication_year: number;
+  stock_available: number;
   language: string;
   description: string;
   number_of_pages: number;
+  stock: number;
   status: boolean;
   category: Category;
 }

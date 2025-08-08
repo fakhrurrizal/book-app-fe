@@ -1,4 +1,5 @@
 import { Box, Typography } from "@mui/material"
+import Image from "next/image"
 
 interface Props {
     maxWidth?: string
@@ -17,7 +18,7 @@ const DataNotFound = ({ maxWidth = '40%' }: Props) => {
 
             }}
         >
-            <img src="/not-found.png" alt="No Data" style={{ maxWidth: maxWidth, height: 'auto', marginTop: -7 }} />
+            <Image src="/not-found.png" width={400} height={400} alt="No Data" style={{ maxWidth: maxWidth, height: 'auto', marginTop: -7 }} />
             <Typography variant="h6" sx={{ marginTop: { md: -7, xs: 0 } }}  >
                 Data tidak ditemukan
             </Typography>
