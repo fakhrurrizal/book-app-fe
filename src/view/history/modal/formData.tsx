@@ -1,6 +1,6 @@
 import { StaticAutoComplete } from "@/components/auto-complete.component"
 import TextField from "@/components/text-field.component"
-import { BookLendingFormData } from "@/pages/book/detail/lending-book/services/lending-book.schemas"
+import { BookLendingFormData } from "@/view/book-lending/services/lending-book.schemas"
 import { Grid, Typography } from "@mui/material"
 import Link from "next/link"
 import { UseFormReturn } from "react-hook-form"
