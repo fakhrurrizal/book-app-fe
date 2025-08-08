@@ -40,12 +40,12 @@ const FilterCategoryBook = ({ open, toggle, form }: Props) => {
         <ModalCustom
             open={open}
             toggle={toggle}
-            title="Filter buku"
+            title="Filter Peminjam"
             buttonDeleteProps={{ onClick: handleReset }}
             buttonOkProps={{ onClick: form.handleSubmit(submit), children: "Filter" }}
         >
             <Grid container spacing={2}>
-              
+
                 <Grid item xs={12}>
                     <StaticAutoComplete control={form.control} label="Sort" name="sort" options={optionSort} />
                 </Grid>
