@@ -155,8 +155,8 @@ const BookAll: NextPageWithLayout = () => {
                                             {item.title.length > 40 ? item.title.slice(0, 40) + '...' : item.title}
                                         </span>
 
-                                        <span className="text-gray-600 text-left mt-2 text-[14px] line-clamp-2">
-                                            {item.description.length > 120 ? item.description.slice(0, 120) + '...' : item.description}
+                                        <span className="text-gray-500 text-left text-[14px] mt-2">
+                                            {item.category?.name}
                                         </span>
 
                                         <span className="text-gray-500 text-left text-[14px] mt-2">
