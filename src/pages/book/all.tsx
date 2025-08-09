@@ -156,7 +156,7 @@ const BookAll: NextPageWithLayout = () => {
                                         </span>
 
                                         <span className="text-gray-500 text-left text-[14px] mt-2">
-                                            {item.category?.name}
+                                            Kategori: {item.category?.name}
                                         </span>
 
                                         <span className="text-gray-500 text-left text-[14px] mt-2">
