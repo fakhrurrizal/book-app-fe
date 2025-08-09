@@ -138,7 +138,7 @@ const BookAll: NextPageWithLayout = () => {
                             <Grid item xs={12} md={3} key={index}>
                                 <Card
                                     className=" bg-primary bg-opacity-15 hover:border-2 border-2 border-transparent relative text-center flex flex-col rounded-md"
-                                    sx={{ maxHeight: 620, minHeight: 620 }}
+                                    sx={{ maxHeight: 600, minHeight: 600 }}
                                 >
                                     <Image
                                         src={item.image || '/default-book-image.jpg'}
