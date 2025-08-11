@@ -50,7 +50,7 @@ const FilterCategoryBook = ({ open, toggle, form }: Props) => {
                     <StaticAutoComplete control={form.control} label="Urutkan" name="sort" options={optionSort} />
                 </Grid>
                 <Grid item xs={12}>
-                    <StaticAutoComplete control={form.control} label="Urutan" name="order" options={optionOrder} />
+                    <StaticAutoComplete control={form.control} label="" name="order" options={optionOrder} />
                 </Grid>
             </Grid>
         </ModalCustom>
