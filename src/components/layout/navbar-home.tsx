@@ -88,7 +88,7 @@ const NavbarHome = ({ children }: { children: ReactNode }) => {
 
     const navItems = [
         { label: 'Kategori', path: '/category' },
-        { label: 'List Buku', path: '/book/all' },
+        { label: 'Daftar Buku', path: '/book/all' },
     ]
 
     if (!mounted) {
