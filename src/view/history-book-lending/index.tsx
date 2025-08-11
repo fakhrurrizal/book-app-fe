@@ -114,18 +114,6 @@ const HistoryBookLendingListPageViews = () => {
         return dayjs(date).format("DD-MMM-YYYY");
     };
 
-    const formatReturnDate = (date: string | null | undefined, status: string) => {
-        if (status === 'returned') {
-            return "-";
-        }
-
-        if (!dayjs(date).isValid() || date === "0001-01-01T00:00:00Z") {
-            return "-";
-        }
-
-        return dayjs(date).format("DD-MMM-YYYY");
-    };
-
     return (
         <>
             <div className='custom__styled__container'>
@@ -165,7 +153,7 @@ const HistoryBookLendingListPageViews = () => {
                                                     {formatLendingDate(item?.due_date, item?.status)}
                                                 </CustomStyledTableData>
                                                 <CustomStyledTableData className='text-center'>
-                                                    {formatReturnDate(item?.return_date, item?.status)}
+                                                    {formatLendingDate(item?.return_date, item?.status)}
                                                 </CustomStyledTableData>
 
 
