@@ -40,6 +40,10 @@ const HeaderItems = [
         alignCenter: true,
     },
     {
+        label: 'Tanggal Dikembalikan',
+        alignCenter: true,
+    },
+    {
         label: 'Status',
         alignCenter: true,
     },
@@ -61,8 +65,6 @@ const HistoryListPageViews = () => {
     const [debouncedSearchValue, setDebouncedSearchValue] = useState('')
 
     const [filterOpen, setFilterOpen] = useState<boolean>(false)
-
-    const [openImage, setOpenImage] = useState(false)
 
     const router = useRouter()
 
@@ -110,6 +112,18 @@ const HistoryListPageViews = () => {
 
     const toggleFilter = () => setFilterOpen(!filterOpen)
 
+    const formatLendingDate = (date: string | null | undefined, status: string) => {
+        if (status === 'requested') {
+            return "-";
+        }
+
+        if (!dayjs(date).isValid() || date === "0001-01-01T00:00:00Z") {
+            return "-";
+        }
+
+        return dayjs(date).format("DD-MMM-YYYY");
+    };
+
     return (
         <>
             <div className='custom__styled__container'>
@@ -119,7 +133,6 @@ const HistoryListPageViews = () => {
                     handleSearch={handleSearch}
                     toggleAdd={toggleAdd}
                     isLoading={isLoading}
-                    toggleFilter={toggleFilter}
                     disabledAdd
                 />
                 <CustomStyledTableContainer isLoading={isLoading} recordsFiltered={recordsFiltered}>
@@ -143,21 +156,19 @@ const HistoryListPageViews = () => {
                                                     </CustomTooltip>
                                                 </CustomStyledTableData>
                                                 <CustomStyledTableData className='text-center'>
-                                                    {dayjs(item?.borrow_date).isValid() &&
-                                                        item?.borrow_date !== "0000-12-31T16:52:48Z"
-                                                        ? dayjs(item.borrow_date).format("DD-MMMM-YYYY")
-                                                        : "-"}
+                                                    {formatLendingDate(item?.borrow_date, item?.status)}
                                                 </CustomStyledTableData>
 
                                                 <CustomStyledTableData className='text-center'>
-                                                    {dayjs(item?.created_at).isValid()
-                                                        ? dayjs(item.created_at).add(14, "day").format("DD-MMMM-YYYY")
-                                                        : "-"}
+                                                    {formatLendingDate(item?.due_date, item?.status)}
+                                                </CustomStyledTableData>
+                                                <CustomStyledTableData className='text-center'>
+                                                    {formatLendingDate(item?.return_date, item?.status)}
                                                 </CustomStyledTableData>
 
                                                 <CustomStyledTableData className='text-center'>
                                                     <span
-                                                        className={`px-2 py-1 rounded-full text-xs font-medium ${item?.status === 'approved'
+                                                        className={` px-2 py-1 rounded-full text-xs font-medium ${item?.status === 'approved'
                                                             ? 'bg-green-100 text-green-800'
                                                             : item?.status === 'requested'
                                                                 ? 'bg-yellow-100 text-yellow-800'

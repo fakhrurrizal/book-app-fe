@@ -30,13 +30,14 @@ const LendingBookView = ({ open, toggle, data }: Props) => {
 
     const {
         control,
-        handleSubmit,
+        handleSubmit, formState: { errors }
     } = useForm<BookLendingFormData>({
         resolver: zodResolver(bookLendingSchema),
         defaultValues: {
             notes: '',
             user_id: user?.id,
             book_id: 0,
+            status: { id: "requested", label: "Menunggu" }
         },
     })
 

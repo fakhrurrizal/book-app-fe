@@ -12,6 +12,10 @@ export const BookCategoryFilterSchema = z
       id: z.string().optional(),
       label: z.string().optional(),
     }),
+    user_id: z.object({
+      id: z.string().optional(),
+      label: z.string().optional(),
+    }),
     order: z.object({
       id: z.string().optional(),
       label: z.string().optional(),
@@ -26,6 +30,10 @@ export const BookCategoryFilterSchema = z
 
     if (data.sort) {
       newData.sort = data.sort.id;
+    }
+
+    if (data.user_id) {
+      newData.user_id = data.user_id.id;
     }
 
     return data;

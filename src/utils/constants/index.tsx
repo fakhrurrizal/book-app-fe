@@ -5,6 +5,7 @@ export const endpoints = {
     upload: 'file',
     login: 'auth/signin',
     register: 'auth/signup',
+    user: 'user',
     book_lending: 'book-lending',
 } as const
 
