@@ -22,7 +22,10 @@ const HeaderItems = [
         label: 'Tanggal Permintaan',
         alignCenter: false,
     },
-
+    {
+        label: 'Nama Lengkap',
+        alignCenter: false,
+    },
     {
         label: 'Nama buku',
         alignCenter: false,
@@ -36,6 +39,10 @@ const HeaderItems = [
         alignCenter: true,
     },
     {
+        label: 'Tanggal Dikembalikan',
+        alignCenter: true,
+    },
+    {
         label: 'Status',
         alignCenter: true,
     },
@@ -44,7 +51,6 @@ const HeaderItems = [
         alignCenter: true,
     },
 ]
-
 const HistoryBookLendingListPageViews = () => {
     const [pageSize, setPageSize] = useState<number>(10)
 
@@ -96,6 +102,30 @@ const HistoryBookLendingListPageViews = () => {
 
     const toggleAdd = () => setAddOpen(!addOpen)
 
+    const formatLendingDate = (date: string | null | undefined, status: string) => {
+        if (status === 'requested') {
+            return "-";
+        }
+
+        if (!dayjs(date).isValid() || date === "0001-01-01T00:00:00Z") {
+            return "-";
+        }
+
+        return dayjs(date).format("DD-MMM-YYYY");
+    };
+
+    const formatReturnDate = (date: string | null | undefined, status: string) => {
+        if (status === 'returned') {
+            return "-";
+        }
+
+        if (!dayjs(date).isValid() || date === "0001-01-01T00:00:00Z") {
+            return "-";
+        }
+
+        return dayjs(date).format("DD-MMM-YYYY");
+    };
+
     return (
         <>
             <div className='custom__styled__container'>
@@ -119,23 +149,25 @@ const HistoryBookLendingListPageViews = () => {
                                         <Fragment key={item?.id}>
                                             <CustomStyledTableRow>
                                                 <CustomStyledTableHead>{dayjs(item?.created_at).format("DD-MMMM-YYYY")}</CustomStyledTableHead>
+                                                <CustomStyledTableData >
+                                                    {item?.user?.name}
+                                                </CustomStyledTableData>
                                                 <CustomStyledTableData className='truncate max-w-[190px]'>
                                                     <CustomTooltip title={item?.description ?? ''}>
                                                         <span className='block truncate'>  {item?.book?.name}</span>
                                                     </CustomTooltip>
                                                 </CustomStyledTableData>
                                                 <CustomStyledTableData className='text-center'>
-                                                    {dayjs(item?.borrow_date).isValid() &&
-                                                        item?.borrow_date !== "0000-12-31T16:52:48Z"
-                                                        ? dayjs(item.borrow_date).format("DD-MMMM-YYYY")
-                                                        : "-"}
+                                                    {formatLendingDate(item?.borrow_date, item?.status)}
                                                 </CustomStyledTableData>
 
                                                 <CustomStyledTableData className='text-center'>
-                                                    {dayjs(item?.created_at).isValid()
-                                                        ? dayjs(item.created_at).add(14, "day").format("DD-MMMM-YYYY")
-                                                        : "-"}
+                                                    {formatLendingDate(item?.due_date, item?.status)}
                                                 </CustomStyledTableData>
+                                                <CustomStyledTableData className='text-center'>
+                                                    {formatReturnDate(item?.return_date, item?.status)}
+                                                </CustomStyledTableData>
+
 
                                                 <CustomStyledTableData className='text-center'>
                                                     <span
