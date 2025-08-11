@@ -14,8 +14,8 @@ interface Props {
 
 
 const optionSort = [
-    { id: "title", label: "Sort berdasarkan Alfabet" },
-    { id: "publication_year", label: "Sort berdasarkan Tahun Terbit" },
+    { id: "title", label: "Urutkan berdasarkan Alfabet" },
+    { id: "publication_year", label: "Urutkan berdasarkan Tahun Terbit" },
 ];
 
 const optionOrder = [
@@ -37,7 +37,7 @@ const FilterBook = ({ open, toggle, form }: Props) => {
         form.reset({
             category_id: { id: 0, label: "Semua Kategori" },
             order: { id: "desc", label: "Terbesar Ke Terkecil" },
-            sort: { id: "title", label: "Sort berdasarkan Alfabet" },
+            sort: { id: "title", label: "Urutkan berdasarkan Alfabet" },
         });
         toggle();
     };
@@ -71,7 +71,7 @@ const FilterBook = ({ open, toggle, form }: Props) => {
                     </Grid>
                 }
                 <Grid item xs={12}>
-                    <StaticAutoComplete control={form.control} label="Sort" name="sort" options={optionSort} />
+                    <StaticAutoComplete control={form.control} label="Urutkan" name="sort" options={optionSort} />
                 </Grid>
                 <Grid item xs={12}>
                     <StaticAutoComplete control={form.control} label="Urutan" name="order" options={optionOrder} />

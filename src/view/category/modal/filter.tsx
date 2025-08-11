@@ -13,8 +13,8 @@ interface Props {
 
 
 const optionSort = [
-    { id: "title", label: "Sort berdasarkan Alfabet" },
-    { id: "publication_year", label: "Sort berdasarkan Tahun Terbit" },
+    { id: "title", label: "Urutkan berdasarkan Alfabet" },
+    { id: "publication_year", label: "Urutkan berdasarkan Tahun Terbit" },
 ];
 
 const optionOrder = [
@@ -45,9 +45,9 @@ const FilterCategoryBook = ({ open, toggle, form }: Props) => {
             buttonOkProps={{ onClick: form.handleSubmit(submit), children: "Filter" }}
         >
             <Grid container spacing={2}>
-              
+
                 <Grid item xs={12}>
-                    <StaticAutoComplete control={form.control} label="Sort" name="sort" options={optionSort} />
+                    <StaticAutoComplete control={form.control} label="Urutkan" name="sort" options={optionSort} />
                 </Grid>
                 <Grid item xs={12}>
                     <StaticAutoComplete control={form.control} label="Urutan" name="order" options={optionOrder} />
