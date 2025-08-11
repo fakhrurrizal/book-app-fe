@@ -175,7 +175,7 @@ const ToolbarSectionTableCustom = ({
                                         htmlFor='default-search'
                                         className='mb-2 text-sm font-medium text-gray-900 sr-only '
                                     >
-                                        Search
+                                        Cari...
                                     </label>
                                     <div className='relative focus:outline-none'>
                                         <div className='flex items-center'>
@@ -211,7 +211,7 @@ const ToolbarSectionTableCustom = ({
                                                     <input
                                                         id='default-search'
                                                         className={`block w-full py-2  ps-10 text-sm text-gray-900 border border-slate-400 rounded-md focus:!outline-none focus:border-blue-500 hover:border-blue-500 focus:outline-blue-500  }`}
-                                                        placeholder='Search...'
+                                                        placeholder='Cari......'
                                                         value={searchValue}
                                                         onChange={handleSearch}
                                                     />
