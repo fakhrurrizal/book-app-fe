@@ -65,7 +65,7 @@ const BookId: NextPageWithLayout = () => {
     const form = useForm<SchemaForm>({
         defaultValues: {
             category_id: { id: 0, label: "Semua Kategori" },
-            order: { id: "desc", label: "" },
+            order: { id: "desc", label: "Urutkan dari Terbesar ke Terkecil" },
             sort: { id: "id", label: "" },
         }
     });
@@ -133,7 +133,7 @@ const BookId: NextPageWithLayout = () => {
 
             <Stack className="animate__animated animate__backInDown animate__delay-1s">
                 <Grid container spacing={1} marginTop={4} >
-                    <Grid item xs={8.5} md={10}>
+                    <Grid item xs={8.5} md={11}>
                         <TextField
                             size='small'
                             name='search'
@@ -144,7 +144,7 @@ const BookId: NextPageWithLayout = () => {
                         />
                     </Grid>
                     <Grid item xs={1} md={1} marginTop={-1}>
-                        <IconButton onClick={toggle}><Icon icon={'ion:filter'} className="text-3xl text-secondary" /></IconButton>
+                        <IconButton onClick={toggle}><Icon icon={'cil:filter'} className="text-3xl text-secondary" /></IconButton>
                     </Grid>
 
                 </Grid>

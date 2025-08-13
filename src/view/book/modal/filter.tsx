@@ -36,7 +36,7 @@ const FilterBook = ({ open, toggle, form }: Props) => {
     const handleReset = () => {
         form.reset({
             category_id: { id: 0, label: "Semua Kategori" },
-            order: { id: "desc", label: "Terbesar Ke Terkecil" },
+            order: { id: "desc", label: "Urutkan dari Terbesar ke Terkecil" },
             sort: { id: "title", label: "Urutkan berdasarkan Alfabet" },
         });
         toggle();

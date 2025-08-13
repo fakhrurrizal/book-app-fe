@@ -5,23 +5,19 @@ import { CustomStyledTableData, CustomStyledTableHead } from '@/components/custo
 import CustomStyledTableRow from '@/components/custom-table/table/custom-styled-table-row'
 import TableHeaderCustomTable from '@/components/custom-table/table/header'
 import ToolbarSectionTableCustom from '@/components/custom-table/toolbar'
-import IconifyIcon from '@/components/icon'
 import PaginationSectionTableCustom from '@/components/pagination'
 import { CustomTooltip } from '@/components/tooltip'
-import { Order } from '@/utils/api-response/pagination'
-import { useBookCategoory } from '@/utils/queries/use-book-category'
+import { SchemaForm } from '@/pages/category/[ID]'
+import { useBook } from '@/utils'
+import { formatNumberWithSeparator } from '@/utils/helpers/format-number.helper'
 import { SelectChangeEvent } from '@mui/material'
-import { useRouter } from 'next/router'
+import Image from 'next/image'
 import { Fragment, useCallback, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import AddTrip from './modal/add'
 import FilterCategoryBook from './modal/filter'
 import RowOptions from './table/row-options'
-import { SchemaForm } from '@/pages/category/[ID]'
-import { useBook } from '@/utils'
-import Image from 'next/image'
 import ShowImage from './table/show-image'
-import { formatNumberWithSeparator } from '@/utils/helpers/format-number.helper'
 
 const HeaderItems = [
     {
@@ -66,8 +62,6 @@ const BookListPageViews = () => {
     const [filterOpen, setFilterOpen] = useState<boolean>(false)
 
     const [openImage, setOpenImage] = useState(false)
-
-    const router = useRouter()
 
     const form = useForm<SchemaForm>({
         defaultValues: {

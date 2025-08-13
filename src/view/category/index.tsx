@@ -53,8 +53,6 @@ const BookCategoryListPageViews = () => {
 
     const [filterOpen, setFilterOpen] = useState<boolean>(false)
 
-    const [openImage, setOpenImage] = useState(false)
-
     const router = useRouter()
 
     const { sort, transportation_type_id } = router.query
@@ -102,8 +100,6 @@ const BookCategoryListPageViews = () => {
 
     const toggleFilter = () => setFilterOpen(!filterOpen)
 
-    const toggleImage = () => setOpenImage(!openImage)
-
     return (
         <>
             <div className='custom__styled__container'>
@@ -119,7 +115,6 @@ const BookCategoryListPageViews = () => {
                 <CustomStyledTableContainer isLoading={isLoading} recordsFiltered={recordsFiltered}>
                     <CustomStyledTable>
                         <TableHeaderCustomTable data={HeaderItems} />
-
                         <tbody className='text-xs'>
                             {!isLoading &&
                                 Array.isArray(ListData) &&
@@ -148,8 +143,6 @@ const BookCategoryListPageViews = () => {
                         </tbody>
                     </CustomStyledTable>
                 </CustomStyledTableContainer>
-
-                {/* Paginasi */}
                 <PaginationSectionTableCustom
                     page={page}
                     pageSize={pageSize}

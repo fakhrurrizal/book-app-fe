@@ -58,9 +58,6 @@ const BookAll: NextPageWithLayout = () => {
 
     const [manage, setManage] = useState<boolean>(false)
 
-
-    const toggleManage = () => setManage(!manage)
-
     const toggle = () => setOpenModal(!openModal)
 
     const toggleAdd = () => setOpenAdd(!openAdd)
@@ -105,7 +102,7 @@ const BookAll: NextPageWithLayout = () => {
             </div>
             <Stack className="animate__animated animate__fadeIn animate__delay-2s">
                 <Grid container spacing={2} marginTop={4} >
-                    <Grid item xs={10} md={10.5}>
+                    <Grid item xs={10} md={11}>
                         <TextField
                             size='small'
                             name='search'
@@ -116,7 +113,7 @@ const BookAll: NextPageWithLayout = () => {
                         />
                     </Grid>
                     <Grid item xs={1} md={0.9} marginTop={-1}>
-                        <IconButton onClick={toggle}><Icon icon={'ion:filter'} className="text-3xl text-secondary" /></IconButton>
+                        <IconButton onClick={toggle}><Icon icon={'cil:filter'} className="text-3xl text-secondary" /></IconButton>
                     </Grid>
 
                 </Grid>
