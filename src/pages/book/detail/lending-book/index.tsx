@@ -101,7 +101,7 @@ const LendingBookView = ({ open, toggle, data }: Props) => {
                             {/* Book Details */}
                             <Box className="flex-1">
                                 <Typography variant="subtitle1" className="font-bold text-gray-800 mb-2">
-                                    Kesehatan Mental, Perspektif Psikologis dan Agama
+                                   {data?.title}
                                 </Typography>
                                 <Box className="grid grid-cols-2 gap-2 text-sm">
                                     <Box>
