@@ -41,7 +41,7 @@ const RowOptions = ({ data }: Props) => {
 
     const handleDelete = async () => {
         try {
-            await axiosInterceptor.delete(`${getApi('book_category')}/${data?.id}`)
+            await axiosInterceptor.delete(`${getApi('book')}/${data?.id}`)
             queryClient.invalidateQueries({ queryKey: ['LIST_BOOK_CATEGORY'] })
             toggleDelete()
         } catch (error) {
